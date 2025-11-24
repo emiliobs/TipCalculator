@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TipCalculatorMAUIApp.MainPage"
+             BackgroundColor="White"
+             Title="Tip Calculator!">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="20"
+            Spacing="20">
+
+            <!--Status bar Spacer (for iOS notch)-->
+            <BoxView HeightRequest="15" Color="Transparent"></BoxView>
+
+            <!--Title-->
+            <Label
+                Text="Tip Calculator"
+                FontSize="48"
+                FontAttributes="Bold"
+                HorizontalOptions="Center"
+                TextColor="#8B3FDB"
+                Margin="0,20,0,40">
+            </Label>
+
+            <!--Bill Amount Secction-->
+            <Label
+                Text="Bill Amount"
+                FontSize="24"
+                FontAttributes="Bold"
+                TextColor="#000000"
+                Margin="0,0,0,10">
+            </Label>
+            <Frame
+                Padding="0"
+                BorderColor="#d1d5db"
+                CornerRadius="12"
+                HasShadow="False">
+                <Entry
+                    x:Name="BillAmountEntry"
+                    Placeholder="Enter bill amount"
+                    PlaceholderColor="#9ca3af"
+                    Keyboard="Numeric"
+                    FontSize="20"
+                    TextColor="#000000"
+                    Background="White"
+                    HeightRequest="60"
+                    Margin="15,0"
+                    TextChanged="BillAmountEntry_TextChanged">
+                </Entry>
+            </Frame>
+
+            <!--Tip Porcentaje Section-->
+            <Label
+                Text="Select Tip Percentage"
+                FontSize="24"
+                FontAttributes="Bold"
+                TextColor="#000000"
+                Margin="0,20,0,10">
+            </Label>
+            <!--Tip Button Grid-->
+            <Grid
+                ColumnDefinitions="*,*,*"
+                ColumnSpacing="15"
+                Margin="0,10,0,0">
+
+                <Button
+                    x:Name="Tip10Button"
+                    Text="10%"
+                    FontSize="24"
+                    FontAttributes="Bold"
+                    Grid.Column="0"
+                    Clicked="Tip10Button_Clicked"
+                    BackgroundColor="#8b3fdb"
+                    TextColor="White"
+                    CornerRadius="12"
+                    HeightRequest="90"
+                    Shadow="{Shadow Brush=Black, Opacity=0.2, Radius=8, Offset='0,4'}">
+                </Button>
+
+                <Button
+                     x:Name="Tip15Button"
+                     Text="10%"
+                     FontSize="24"
+                     FontAttributes="Bold"
+                     Grid.Column="1"
+                     Clicked="Tip15Button_Clicked"
+                     BackgroundColor="#8b3fdb"
+                     TextColor="White"
+                     CornerRadius="12"
+                     HeightRequest="90"
+                     Shadow="{Shadow Brush=Black, Opacity=0.2, Radius=8, Offset='0,4'}">
+                </Button>
+                <Button
+                     x:Name="Tip20Button"
+                     Text="10%"
+                     FontSize="24"
+                     FontAttributes="Bold"
+                     Grid.Column="2"
+                     Clicked="Tip20Button_Clicked"
+                     BackgroundColor="#8b3fdb"
+                     TextColor="White"
+                     CornerRadius="12"
+                     HeightRequest="90"
+                     Shadow="{Shadow Brush=Black, Opacity=0.2, Radius=8, Offset='0,4'}">
+                </Button>
+            </Grid>
+            
+            <!--Result Display Frame-->
+            <Frame
+                BorderColor="#8b3fdb"
+                CornerRadius="16"
+                Padding="30"
+                Margin="0,30,0,0"
+                HasShadow="True"
+                BackgroundColor="#f9f5ff">
+
+                <VerticalStackLayout Spacing="15">
+                    <!--Tip Amount-->
+                    <Label
+                        x:Name="TipAmountLabel"
+                        Text="Tip Amount: £0.00"
+                        FontSize="24"
+                        FontAttributes="Bold"
+                        HorizontalOptions="Center"
+                        TextColor="#000000">                        
+                    </Label>
+                    
+                    <!--Total Amount-->
+                    <Label
+                        x:Name="TotoalAmountLabel"
+                        Text="Total: £0.00"
+                        FontSize="32"
+                        FontAttributes="Bold"
+                        HorizontalOptions="Center"
+                        TextColor="#8b3fdb">                        
+                    </Label>
+                </VerticalStackLayout>
+            </Frame>
+            
+            <!--Bottom Spacer-->
+            <BoxView HeightRequest="40" Color="Transparent"></BoxView>
+            
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
