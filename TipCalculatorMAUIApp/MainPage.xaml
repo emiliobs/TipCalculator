@@ -46,7 +46,7 @@
                     Background="White"
                     HeightRequest="60"
                     Margin="15,0"
-                    TextChanged="BillAmountEntry_TextChanged">
+                    TextChanged="OnBillAmountChanged">
                 </Entry>
             </Frame>
 
@@ -70,7 +70,7 @@
                     FontSize="24"
                     FontAttributes="Bold"
                     Grid.Column="0"
-                    Clicked="Tip10Button_Clicked"
+                    Clicked="OnTipPercentageClicked"
                     BackgroundColor="#8b3fdb"
                     TextColor="White"
                     CornerRadius="12"
@@ -84,7 +84,7 @@
                      FontSize="24"
                      FontAttributes="Bold"
                      Grid.Column="1"
-                     Clicked="Tip15Button_Clicked"
+                     Clicked="OnTipPercentageClicked"
                      BackgroundColor="#8b3fdb"
                      TextColor="White"
                      CornerRadius="12"
@@ -97,7 +97,7 @@
                      FontSize="24"
                      FontAttributes="Bold"
                      Grid.Column="2"
-                     Clicked="Tip20Button_Clicked"
+                     Clicked="OnTipPercentageClicked"
                      BackgroundColor="#8b3fdb"
                      TextColor="White"
                      CornerRadius="12"
@@ -128,7 +128,7 @@
                     
                     <!--Total Amount-->
                     <Label
-                        x:Name="TotoalAmountLabel"
+                        x:Name="TotalAmountLabel"
                         Text="Total: £0.00"
                         FontSize="32"
                         FontAttributes="Bold"
