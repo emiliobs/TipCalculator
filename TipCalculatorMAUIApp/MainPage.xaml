@@ -7,58 +7,51 @@
 
     <ScrollView>
         <VerticalStackLayout
-            Padding="20"
-            Spacing="20">
+            Padding="5"
+            Spacing="10">
 
-            <!--Status bar Spacer (for iOS notch)-->
-            <BoxView HeightRequest="15" Color="Transparent"></BoxView>
+            <BoxView HeightRequest="10" Color="Transparent" />
 
-            <!--Title-->
             <Label
                 Text="Tip Calculator"
                 FontSize="48"
                 FontAttributes="Bold"
                 HorizontalOptions="Center"
                 TextColor="#8B3FDB"
-                Margin="0,20,0,40">
-            </Label>
+                Margin="0,20,0,40" />
 
-            <!--Bill Amount Secction-->
             <Label
                 Text="Bill Amount"
                 FontSize="24"
                 FontAttributes="Bold"
                 TextColor="#000000"
-                Margin="0,0,0,10">
-            </Label>
-            <Frame
-                Padding="0"
-                BorderColor="#d1d5db"
-                CornerRadius="12"
-                HasShadow="False">
+                Margin="0,0,0,10" />
+
+            <Border
+                Stroke="#D1D5DB"
+                StrokeThickness="2"
+                BackgroundColor="White"
+                StrokeShape="RoundRectangle 12"
+                Padding="15,0">
                 <Entry
                     x:Name="BillAmountEntry"
                     Placeholder="Enter bill amount"
-                    PlaceholderColor="#9ca3af"
+                    PlaceholderColor="#9CA3AF"
                     Keyboard="Numeric"
                     FontSize="20"
                     TextColor="#000000"
-                    Background="White"
+                    BackgroundColor="Transparent"
                     HeightRequest="60"
-                    Margin="15,0"
-                    TextChanged="OnBillAmountChanged">
-                </Entry>
-            </Frame>
+                    TextChanged="OnBillAmountChanged" />
+            </Border>
 
-            <!--Tip Porcentaje Section-->
             <Label
                 Text="Select Tip Percentage"
                 FontSize="24"
                 FontAttributes="Bold"
                 TextColor="#000000"
-                Margin="0,20,0,10">
-            </Label>
-            <!--Tip Button Grid-->
+                Margin="0,20,0,10" />
+
             <Grid
                 ColumnDefinitions="*,*,*"
                 ColumnSpacing="15"
@@ -71,76 +64,64 @@
                     FontAttributes="Bold"
                     Grid.Column="0"
                     Clicked="OnTipPercentageClicked"
-                    BackgroundColor="#8b3fdb"
+                    BackgroundColor="#8B3FDB"
                     TextColor="White"
                     CornerRadius="12"
-                    HeightRequest="90"
-                    Shadow="{Shadow Brush=Black, Opacity=0.2, Radius=8, Offset='0,4'}">
-                </Button>
+                    HeightRequest="90" />
 
                 <Button
-                     x:Name="Tip15Button"
-                     Text="10%"
-                     FontSize="24"
-                     FontAttributes="Bold"
-                     Grid.Column="1"
-                     Clicked="OnTipPercentageClicked"
-                     BackgroundColor="#8b3fdb"
-                     TextColor="White"
-                     CornerRadius="12"
-                     HeightRequest="90"
-                     Shadow="{Shadow Brush=Black, Opacity=0.2, Radius=8, Offset='0,4'}">
-                </Button>
+                    x:Name="Tip15Button"
+                    Text="15%"
+                    FontSize="24"
+                    FontAttributes="Bold"
+                    Grid.Column="1"
+                    Clicked="OnTipPercentageClicked"
+                    BackgroundColor="#8B3FDB"
+                    TextColor="White"
+                    CornerRadius="12"
+                    HeightRequest="90" />
+
                 <Button
-                     x:Name="Tip20Button"
-                     Text="10%"
-                     FontSize="24"
-                     FontAttributes="Bold"
-                     Grid.Column="2"
-                     Clicked="OnTipPercentageClicked"
-                     BackgroundColor="#8b3fdb"
-                     TextColor="White"
-                     CornerRadius="12"
-                     HeightRequest="90"
-                     Shadow="{Shadow Brush=Black, Opacity=0.2, Radius=8, Offset='0,4'}">
-                </Button>
+                    x:Name="Tip20Button"
+                    Text="20%"
+                    FontSize="24"
+                    FontAttributes="Bold"
+                    Grid.Column="2"
+                    Clicked="OnTipPercentageClicked"
+                    BackgroundColor="#8B3FDB"
+                    TextColor="White"
+                    CornerRadius="12"
+                    HeightRequest="90" />
             </Grid>
-            
-            <!--Result Display Frame-->
-            <Frame
-                BorderColor="#8b3fdb"
-                CornerRadius="16"
+
+            <Border
+                Stroke="#8B3FDB"
+                StrokeThickness="3"
+                BackgroundColor="#F9F5FF"
+                StrokeShape="RoundRectangle 16"
                 Padding="30"
-                Margin="0,30,0,0"
-                HasShadow="True"
-                BackgroundColor="#f9f5ff">
+                Margin="0,30,0,0">
 
                 <VerticalStackLayout Spacing="15">
-                    <!--Tip Amount-->
                     <Label
                         x:Name="TipAmountLabel"
-                        Text="Tip Amount: £0.00"
+                        Text="Tip Amount: $0.00"
                         FontSize="24"
                         FontAttributes="Bold"
                         HorizontalOptions="Center"
-                        TextColor="#000000">                        
-                    </Label>
-                    
-                    <!--Total Amount-->
+                        TextColor="#000000" />
+
                     <Label
                         x:Name="TotalAmountLabel"
-                        Text="Total: £0.00"
+                        Text="Total: $0.00"
                         FontSize="32"
                         FontAttributes="Bold"
                         HorizontalOptions="Center"
-                        TextColor="#8b3fdb">                        
-                    </Label>
+                        TextColor="#8B3FDB" />
                 </VerticalStackLayout>
-            </Frame>
-            
-            <!--Bottom Spacer-->
-            <BoxView HeightRequest="40" Color="Transparent"></BoxView>
-            
+            </Border>
+
+            <BoxView HeightRequest="15" Color="Transparent" />
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

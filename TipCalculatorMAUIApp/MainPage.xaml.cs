@@ -25,8 +25,9 @@ namespace TipCalculatorMAUIApp
         /// Handles tip percentage button clicks
         /// </summary>
 
-        private void OnTipPercentageClicked(object sender, EventArgs e)
+        private async void OnTipPercentageClicked(object sender, EventArgs e)
         {
+
             if (sender is not Button button)
             {
                 return;
@@ -55,7 +56,7 @@ namespace TipCalculatorMAUIApp
         /// <summary>
         /// Calculates the tip and updates the display labels
         /// </summary>
-        private void CalculateAndDisplayTip(decimal amount, decimal percentage)
+        private async void CalculateAndDisplayTip(decimal amount, decimal percentage)
         {
             // Claculate tip amount
             decimal tipAmount = amount * (percentage / 100);
