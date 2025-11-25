@@ -5,5 +5,6 @@
 # Color Gallery App  Details and select Color
 <img width="274" height="700" alt="image" src="https://github.com/user-attachments/assets/90c53919-93da-4d6f-8dfa-439666ea502d" />
 
+
 <img width="274" height="702" alt="image" src="https://github.com/user-attachments/assets/ca881f85-44f2-48a4-930f-68424600e0c7" />
 
