@@ -9,57 +9,78 @@ using UserManagerMAUIApp.Services;
 
 namespace UserManagerMAUIApp.ViewModels
 {
-    //ViewModel for managing user with MVVM pattern
+    /// <summary>
+    /// ViewModel for managing users with MVVM pattern
+    /// </summary>
     public partial class UserViewModel : ObservableObject
     {
         private readonly IUserService _userService;
 
-        // Observable collection of user for data binding
+        /// <summary>
+        /// Observable collection of users for data binding
+        /// </summary>
         [ObservableProperty]
         private ObservableCollection<User> users;
 
-        //Indicate whether data id currently loading
+        /// <summary>
+        /// Indicates whether data is currently loading
+        /// </summary>
         [ObservableProperty]
         private bool isLoading;
 
-        // Indicate whether users are loaded
+        /// <summary>
+        /// Indicates whether users are loaded
+        /// </summary>
         [ObservableProperty]
         private bool hasUsers;
 
+        /// <summary>
+        /// Status message for user feedback
+        /// </summary>
         [ObservableProperty]
         private string statusMessage;
 
+        /// <summary>
+        /// Total count of users
+        /// </summary>
         [ObservableProperty]
         private int totalUsers;
 
+        /// <summary>
+        /// Constructor with dependency injection
+        /// </summary>
         public UserViewModel(IUserService userService)
         {
-            this._userService = userService;
+            _userService = userService;
             users = new ObservableCollection<User>();
-            statusMessage = "Click 'Load User' to fetch data ";
+            statusMessage = "Click 'Load Users' to fetch data";
             hasUsers = false;
         }
 
-        // Command to load users from the service
+        /// <summary>
+        /// Command to load users from the service
+        /// </summary>
         [RelayCommand]
-        private async Task LoadUserAsync()
+        private async Task LoadUsersAsync()
         {
             try
             {
                 IsLoading = true;
                 StatusMessage = "Loading users.....";
 
+                // Fetch users from service
                 var userList = await _userService.GetUserAsync();
 
+                // Clear and repopulate collection
                 Users.Clear();
                 foreach (var user in userList)
                 {
-                    users.Add(user);
+                    Users.Add(user);
                 }
 
-                TotalUsers = users.Count;
-                HasUsers = users.Count > 0;
-                StatusMessage = $"Succesfully loaded {TotalUsers} users.";
+                TotalUsers = Users.Count;
+                HasUsers = Users.Count > 0;
+                StatusMessage = $"Successfully loaded {TotalUsers} users";
             }
             catch (Exception ex)
             {
@@ -72,10 +93,21 @@ namespace UserManagerMAUIApp.ViewModels
             }
         }
 
+        /// <summary>
+        /// Command to refresh users
+        /// </summary>
         [RelayCommand]
-        private async Task RefresUserAsync()
+        private async Task RefreshUsersAsync()
         {
-            await LoadUserAsync();
+            await LoadUsersAsync();
+        }
+
+        /// <summary>
+        /// Command to remove a user
+        /// </summary>
+        [RelayCommand]
+        private async Task RemoveUserAsync(User user)
+        {
         }
     }
 }
