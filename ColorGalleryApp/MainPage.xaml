@@ -1,0 +1,192 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ColorGalleryApp.MainPage"
+             BackgroundColor="#f3f4f6">
+
+    
+    <Grid RowDefinitions="Auto,*,Auto" Padding="0">
+
+        <!-- Header Section -->
+        <Border 
+            Grid.Row="0"
+            BackgroundColor="#6366F1"
+            Padding="20,50,20,25"
+            StrokeThickness="0">
+
+            <VerticalStackLayout Spacing="8">
+                <Label 
+                    Text="🎨 Color Gallery"
+                    FontSize="38"
+                    FontAttributes="Bold"
+                    TextColor="White"
+                    HorizontalOptions="Center"/>
+
+                <Label 
+                    Text="Explore beautiful colors"
+                    FontSize="16"
+                    TextColor="#E0E7FF"
+                    HorizontalOptions="Center"/>
+            </VerticalStackLayout>
+        </Border>
+
+        <!-- CollectionView for Colors List -->
+        <CollectionView 
+            Grid.Row="1"
+            x:Name="ColorsCollectionView"
+            SelectionMode="Single"
+            SelectionChanged="OnColorSelected"
+            Margin="15,20,15,15"
+            BackgroundColor="Transparent">
+
+            <!-- Spacing between items -->
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout 
+                    Orientation="Vertical" 
+                    ItemSpacing="15"/>
+            </CollectionView.ItemsLayout>
+
+            <!-- Item Template - How each color card looks -->
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <!-- Card Container -->
+                    <Border 
+                        Stroke="#E5E7EB"
+                        StrokeThickness="1"
+                        BackgroundColor="White"
+                        StrokeShape="RoundRectangle 16"
+                        Padding="0">
+
+                        <!-- Card Shadow -->
+                        <Border.Shadow>
+                            <Shadow 
+                                Brush="Black"
+                                Opacity="0.12"
+                                Radius="10"
+                                Offset="0,4"/>
+                        </Border.Shadow>
+
+                        <!-- Card Content Grid -->
+                        <Grid 
+                            ColumnDefinitions="110,*"
+                            Padding="15"
+                            ColumnSpacing="15"
+                            HeightRequest="100">
+
+                            <!-- Color Preview Box -->
+                            <Border 
+                                Grid.Column="0"
+                                BackgroundColor="{Binding ColorValue}"
+                                StrokeShape="RoundRectangle 12"
+                                WidthRequest="110"
+                                HeightRequest="85"
+                                Stroke="#D1D5DB"
+                                StrokeThickness="2"
+                                VerticalOptions="Center">
+
+                                <Border.Shadow>
+                                    <Shadow 
+                                        Brush="Black"
+                                        Opacity="0.2"
+                                        Radius="6"
+                                        Offset="0,2"/>
+                                </Border.Shadow>
+                            </Border>
+
+                            <!-- Color Information -->
+                            <VerticalStackLayout 
+                                Grid.Column="1"
+                                Spacing="6"
+                                VerticalOptions="Center">
+
+                                <!-- Color Name -->
+                                <Label 
+                                    Text="{Binding Name}"
+                                    FontSize="24"
+                                    FontAttributes="Bold"
+                                    TextColor="#1F2937"
+                                    LineBreakMode="TailTruncation"/>
+
+                                <!-- Hex Code -->
+                                <HorizontalStackLayout Spacing="8">
+                                    <Label 
+                                        Text="Hex:"
+                                        FontSize="15"
+                                        TextColor="#6B7280"
+                                        FontAttributes="Bold"/>
+                                    <Label 
+                                        Text="{Binding Hex}"
+                                        FontSize="16"
+                                        TextColor="#6366F1"
+                                        FontFamily="Courier"
+                                        FontAttributes="Bold"/>
+                                </HorizontalStackLayout>
+
+                                <!-- Tap Hint -->
+                                <Label 
+                                    Text="👆 Tap to preview fullscreen"
+                                    FontSize="12"
+                                    TextColor="#9CA3AF"
+                                    Margin="0,4,0,0"/>
+                            </VerticalStackLayout>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+            <!-- Empty State View -->
+            <CollectionView.EmptyView>
+                <VerticalStackLayout 
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    Spacing="15"
+                    Padding="40">
+
+                    <Label 
+                        Text="🎨"
+                        FontSize="80"
+                        HorizontalOptions="Center"/>
+
+                    <Label 
+                        Text="No colors available"
+                        FontSize="20"
+                        FontAttributes="Bold"
+                        TextColor="#6B7280"
+                        HorizontalOptions="Center"/>
+
+                    <Label 
+                        Text="Colors will appear here"
+                        FontSize="14"
+                        TextColor="#9CA3AF"
+                        HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+            </CollectionView.EmptyView>
+        </CollectionView>
+
+        <!-- Footer Info -->
+        <Border 
+            Grid.Row="2"
+            BackgroundColor="White"
+            Padding="15,12"
+            Stroke="#E5E7EB"
+            StrokeThickness="1">
+
+            <HorizontalStackLayout 
+                HorizontalOptions="Center"
+                Spacing="8">
+                <Label 
+                    Text="Total Colors:"
+                    FontSize="14"
+                    TextColor="#6B7280"
+                    FontAttributes="Bold"/>
+                <Label 
+                    x:Name="TotalColorsLabel"
+                    Text="0"
+                    FontSize="14"
+                    TextColor="#6366F1"
+                    FontAttributes="Bold"/>
+            </HorizontalStackLayout>
+        </Border>
+    </Grid>
+
+</ContentPage>

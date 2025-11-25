@@ -1,4 +1,7 @@
 <Solution>
+  <Project Path="ColorGalleryApp/ColorGalleryApp.csproj" Id="4fe16424-8adf-4206-a1cf-69126d223229">
+    <Deploy />
+  </Project>
   <Project Path="TipCalculatorMAUIApp/TipCalculatorMAUIApp.csproj">
     <Deploy />
   </Project>
