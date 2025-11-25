@@ -5,4 +5,7 @@
   <Project Path="TipCalculatorMAUIApp/TipCalculatorMAUIApp.csproj">
     <Deploy />
   </Project>
+  <Project Path="UserManagerMAUIApp/UserManagerMAUIApp.csproj" Id="b38d1f0b-3187-4bd3-b7dd-4f0f02c5b032">
+    <Deploy />
+  </Project>
 </Solution>
