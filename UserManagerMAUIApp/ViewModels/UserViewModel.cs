@@ -1,9 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
 using UserManagerMAUIApp.Models;
 using UserManagerMAUIApp.Services;
 
@@ -23,10 +20,39 @@ namespace UserManagerMAUIApp.ViewModels
         private ObservableCollection<User> users;
 
         /// <summary>
+        /// New user name input
+        /// </summary>
+        [ObservableProperty]
+        private string newUserName;
+
+        /// <summary>
+        /// New user email input
+        /// </summary>
+        [ObservableProperty]
+        private string newUserEmail;
+
+        /// <summary>
+        /// New user role input
+        /// </summary>
+        [ObservableProperty]
+        private string newUserRole;
+
+        /// <summary>
+        /// Shows/hides the add user form
+        /// </summary>
+        [ObservableProperty]
+        private bool isAddUserVisible;
+
+        /// <summary>
         /// Indicates whether data is currently loading
         /// </summary>
         [ObservableProperty]
         private bool isLoading;
+
+        //partial void OnIsLoadingChanged(bool value)
+        //{
+        //    OnPropertyChanged(nameof(IsNotLoading));
+        //}
 
         /// <summary>
         /// Indicates whether users are loaded
@@ -108,6 +134,31 @@ namespace UserManagerMAUIApp.ViewModels
         [RelayCommand]
         private async Task RemoveUserAsync(User user)
         {
+            if (user == null)
+            {
+                return;
+            }
+
+            try
+            {
+                IsLoading = true;
+                StatusMessage = $"Removing {user.Name}.....";
+
+                await _userService.RemoveUserAsync(user);
+                Users.Remove(user);
+
+                TotalUsers = Users.Count;
+                HasUsers = Users.Count > 0;
+                StatusMessage = $"SUccesfully removed {user.Name}";
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = $"Error: {ex.Message}";
+            }
+            finally
+            {
+                IsLoading = false;
+            }
         }
     }
 }

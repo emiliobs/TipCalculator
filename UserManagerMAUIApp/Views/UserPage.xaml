@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="UserManagerMAUIApp.Views.UserPage"
+             xmlns:viewmodels="clr-namespace:UserManagerMAUIApp.ViewModels"
+             xmlns:models="clr-namespace:UserManagerMAUIApp.Models"
+             x:DataType="viewmodels:UserViewModel"
+             Title="User Manager"
+             BackgroundColor="#f8fafc">
+    <ScrollView>
+        <Grid RowDefinitions="Auto,Auto,*,Auto" Padding="0">
+            <!-- Header Section -->
+            <Border 
+            Grid.Row="0"
+            BackgroundColor="#3B82F6"
+            Padding="20,50,20,25"
+            StrokeThickness="0">
+
+                <VerticalStackLayout Spacing="8">
+                    <Label 
+                    Text="👥 User Manager"
+                    FontSize="38"
+                    FontAttributes="Bold"
+                    TextColor="White"
+                    HorizontalOptions="Center"/>
+
+                    <Label 
+                    Text="MVVM Architecture"
+                    FontSize="14"
+                    TextColor="#DBEAFE"
+                    HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Action Buttons Section -->
+            <Grid 
+            Grid.Row="1"
+            ColumnDefinitions="*,*"
+            ColumnSpacing="12"
+            Padding="15,15,15,10"
+            BackgroundColor="White">
+
+                <!-- Load Users Button -->
+                <Button 
+                Grid.Column="0"
+                Text="Load Users"
+                Command="{Binding LoadUsersAsyncCommand}"
+                IsEnabled="{Binding IsLoading, Converter={StaticResource InvertedBoolConverter}}"
+                BackgroundColor="#3B82F6"
+                TextColor="White"
+                FontSize="16"
+                FontAttributes="Bold"
+                CornerRadius="10"
+                HeightRequest="50">
+                    <Button.Shadow>
+                        <Shadow 
+                        Brush="Black"
+                        Opacity="0.2"
+                        Radius="8"
+                        Offset="0,4"/>
+                    </Button.Shadow>
+                </Button>
+
+            </Grid>
+            
+        </Grid>
+    </ScrollView>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <!-- Inverted Bool Converter -->
+            <viewmodels:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+
+            <!-- Bool to Status Text Converter -->
+            <viewmodels:BoolToStatusConverter x:Key="BoolToStatusConverter" />
+
+            <!-- Bool to Color Converter -->
+            <viewmodels:BoolToColorConverter x:Key="BoolToColorConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+</ContentPage>
