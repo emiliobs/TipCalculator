@@ -7,74 +7,295 @@
              x:DataType="viewmodels:UserViewModel"
              Title="User Manager"
              BackgroundColor="#f8fafc">
-    <ScrollView>
-        <Grid RowDefinitions="Auto,Auto,*,Auto" Padding="0">
-            <!-- Header Section -->
-            <Border 
+    <Grid RowDefinitions="Auto,Auto,*,Auto" Padding="0">
+
+        <!-- Header Section -->
+        <Border
             Grid.Row="0"
             BackgroundColor="#3B82F6"
             Padding="20,50,20,25"
             StrokeThickness="0">
 
-                <VerticalStackLayout Spacing="8">
-                    <Label 
+            <VerticalStackLayout Spacing="8">
+                <Label
                     Text="👥 User Manager"
                     FontSize="38"
                     FontAttributes="Bold"
                     TextColor="White"
-                    HorizontalOptions="Center"/>
+                    HorizontalOptions="Center" />
 
-                    <Label 
-                    Text="MVVM Architecture"
+                <Label
+                    Text="MVVM Architecture Demo"
                     FontSize="14"
                     TextColor="#DBEAFE"
-                    HorizontalOptions="Center"/>
-                </VerticalStackLayout>
-            </Border>
+                    HorizontalOptions="Center" />
+            </VerticalStackLayout>
+        </Border>
 
-            <!-- Action Buttons Section -->
-            <Grid 
+        <!-- Action Buttons Section -->
+        <Grid
             Grid.Row="1"
             ColumnDefinitions="*,*"
             ColumnSpacing="12"
             Padding="15,15,15,10"
             BackgroundColor="White">
 
-                <!-- Load Users Button -->
-                <Button 
+            <!-- Load Users Button -->
+            <Button
                 Grid.Column="0"
                 Text="Load Users"
-                Command="{Binding LoadUsersAsyncCommand}"
+                Command="{Binding LoadUsersCommand}"
                 IsEnabled="{Binding IsLoading, Converter={StaticResource InvertedBoolConverter}}"
                 BackgroundColor="#3B82F6"
                 TextColor="White"
                 FontSize="16"
                 FontAttributes="Bold"
                 CornerRadius="10"
-                HeightRequest="50">
-                    <Button.Shadow>
-                        <Shadow 
-                        Brush="Black"
-                        Opacity="0.2"
-                        Radius="8"
-                        Offset="0,4"/>
-                    </Button.Shadow>
-                </Button>
+                HeightRequest="50" />
 
-            </Grid>
-            
+            <!-- Refresh Button -->
+            <Button
+                Grid.Column="1"
+                Text="🔄 Refresh"
+                Command="{Binding RefreshUsersCommand}"
+                IsEnabled="{Binding IsLoading, Converter={StaticResource InvertedBoolConverter}}"
+                BackgroundColor="#10B981"
+                TextColor="White"
+                FontSize="16"
+                FontAttributes="Bold"
+                CornerRadius="10"
+                HeightRequest="50" />
         </Grid>
-    </ScrollView>
+        
+        <!--Zona Contenido (row 2)-->
+        <Grid Grid.Row="2" RowDefinitions="Auto, *">
+            <!-- Status Bar -->
+            <Border
+                Grid.Row="0"
+                BackgroundColor="#EFF6FF"
+                Padding="15,12"
+                Margin="15,0,15,10"
+                StrokeThickness="0"
+                StrokeShape="RoundRectangle 8"
+                IsVisible="{Binding IsLoading, Converter={StaticResource InvertedBoolConverter}}">
+
+                <HorizontalStackLayout Spacing="12">
+                  <Label
+                    Text="📊"
+                    FontSize="18"
+                    VerticalOptions="Center"/>
+                  <Label
+                    Text="{Binding StatusMessage}"
+                    FontSize="14"
+                    TextColor="#3B82F6"
+                    VerticalOptions="Center"
+                    FontAttributes="Bold" />
+                </HorizontalStackLayout>
+            </Border>
+            <!--Cuerpo (load + list) debajo-->
+            <Grid Grid.Row="1">
+                <!-- Loading Indicator -->
+                <VerticalStackLayout
+Grid.Row="2"
+IsVisible="{Binding IsLoading}"
+HorizontalOptions="Center"
+VerticalOptions="Center"
+Spacing="15"
+Padding="20">
+
+                    <ActivityIndicator
+    IsRunning="{Binding IsLoading}"
+    Color="#3B82F6"
+    WidthRequest="50"
+    HeightRequest="50" />
+
+                    <Label
+    Text="Loading users..."
+    FontSize="16"
+    TextColor="#6B7280"
+    FontAttributes="Bold" />
+                </VerticalStackLayout>
+
+                <!-- Users List -->
+                <CollectionView
+Grid.Row="2"
+ItemsSource="{Binding Users}"
+IsVisible="{Binding HasUsers}"
+SelectionMode="None"
+Margin="15,0,15,15"
+BackgroundColor="Transparent">
+
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout
+        Orientation="Vertical"
+        ItemSpacing="12" />
+                    </CollectionView.ItemsLayout>
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:User">
+                            <Border
+            BackgroundColor="White"
+            Stroke="#E5E7EB"
+            StrokeThickness="1"
+            StrokeShape="RoundRectangle 12"
+            Padding="15">
+
+                                <Border.Shadow>
+                                    <Shadow
+                    Brush="Black"
+                    Opacity="0.08"
+                    Radius="8"
+                    Offset="0,2" />
+                                </Border.Shadow>
+
+                                <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
+
+                                    <!-- Avatar Circle -->
+                                    <Border
+                    Grid.Column="0"
+                    BackgroundColor="#3B82F6"
+                    WidthRequest="50"
+                    HeightRequest="50"
+                    StrokeShape="RoundRectangle 25"
+                    VerticalOptions="Center">
+                                        <Label
+                        Text="{Binding Name, StringFormat='{0:0:1}'}"
+                        FontSize="20"
+                        FontAttributes="Bold"
+                        TextColor="White"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center" />
+                                    </Border>
+
+                                    <!-- User Info -->
+                                    <VerticalStackLayout
+                    Grid.Column="1"
+                    Spacing="4"
+                    VerticalOptions="Center">
+
+                                        <Label
+                        Text="{Binding Name}"
+                        FontSize="18"
+                        FontAttributes="Bold"
+                        TextColor="#1F2937" />
+
+                                        <Label
+                        Text="{Binding Email}"
+                        FontSize="14"
+                        TextColor="#6B7280" />
+
+                                        <HorizontalStackLayout Spacing="8">
+                                            <Border
+                            BackgroundColor="#DBEAFE"
+                            Padding="6,2"
+                            StrokeShape="RoundRectangle 4"
+                            StrokeThickness="0">
+                                                <Label
+                                Text="{Binding Role}"
+                                FontSize="11"
+                                TextColor="#3B82F6"
+                                FontAttributes="Bold" />
+                                            </Border>
+
+                                            <Label
+                            Text="{Binding IsActive, Converter={StaticResource BoolToStatusConverter}}"
+                            FontSize="11"
+                            TextColor="{Binding IsActive, Converter={StaticResource BoolToColorConverter}}"
+                            FontAttributes="Bold" />
+                                        </HorizontalStackLayout>
+                                    </VerticalStackLayout>
+
+                                    <!-- Delete Button -->
+                                    <Button
+                    Grid.Column="2"
+                    Text="🗑️"
+                    FontSize="18"
+                    BackgroundColor="#FEE2E2"
+                    TextColor="#DC2626"
+                    CornerRadius="8"
+                    WidthRequest="45"
+                    HeightRequest="45"
+                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:UserViewModel}}, Path=RemoveUserCommand}"
+                    CommandParameter="{Binding .}"
+                    VerticalOptions="Center" />
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+
+                    <!-- Empty View -->
+                    <CollectionView.EmptyView>
+                        <VerticalStackLayout
+        HorizontalOptions="Center"
+        VerticalOptions="Center"
+        Spacing="15"
+        Padding="40"
+        IsVisible="{Binding IsLoading, Converter={StaticResource InvertedBoolConverter}}">
+
+                            <Label
+            Text="👥"
+            FontSize="80"
+            HorizontalOptions="Center" />
+
+                            <Label
+            Text="No Users Loaded"
+            FontSize="22"
+            FontAttributes="Bold"
+            TextColor="#6B7280"
+            HorizontalOptions="Center" />
+
+                            <Label
+            Text="Click 'Load Users' to fetch data"
+            FontSize="14"
+            TextColor="#9CA3AF"
+            HorizontalOptions="Center" />
+                        </VerticalStackLayout>
+                    </CollectionView.EmptyView>
+                </CollectionView>
+            </Grid>
+        </Grid>
+        
+        <!-- Footer Stats -->
+        <Border
+            Grid.Row="3"
+            BackgroundColor="White"
+            Padding="15,12"
+            Stroke="#E5E7EB"
+            StrokeThickness="1">
+
+            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="15">
+                <HorizontalStackLayout
+                    Grid.Column="0"
+                    Spacing="8">
+                    <Label
+                        Text="Total Users:"
+                        FontSize="14"
+                        TextColor="#6B7280"
+                        FontAttributes="Bold"
+                        VerticalOptions="Center" />
+                    <Label
+                        Text="{Binding TotalUsers}"
+                        FontSize="18"
+                        TextColor="#3B82F6"
+                        FontAttributes="Bold"
+                        VerticalOptions="Center" />
+                </HorizontalStackLayout>
+
+                <Label
+                    Grid.Column="1"
+                    Text="Powered by MVVM"
+                    FontSize="11"
+                    TextColor="#9CA3AF"
+                    VerticalOptions="Center"
+                    FontAttributes="Italic" />
+            </Grid>
+        </Border>
+    </Grid>
 
     <ContentPage.Resources>
         <ResourceDictionary>
-            <!-- Inverted Bool Converter -->
             <viewmodels:InvertedBoolConverter x:Key="InvertedBoolConverter" />
-
-            <!-- Bool to Status Text Converter -->
             <viewmodels:BoolToStatusConverter x:Key="BoolToStatusConverter" />
-
-            <!-- Bool to Color Converter -->
             <viewmodels:BoolToColorConverter x:Key="BoolToColorConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
