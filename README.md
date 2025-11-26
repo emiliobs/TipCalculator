@@ -8,3 +8,5 @@
 
 <img width="274" height="702" alt="image" src="https://github.com/user-attachments/assets/ca881f85-44f2-48a4-930f-68424600e0c7" />
 
+## User Manager MAUI App
+<img width="293" height="754" alt="image" src="https://github.com/user-attachments/assets/e568d356-4447-4626-844a-c85ec71cbcd3" />
