@@ -59,7 +59,7 @@
                 Text="➕ Add"
                 Command="{Binding ShowAddUserFormCommand}"
                 IsEnabled="{Binding IsLoading, Converter={StaticResource InvertedBoolConverter}}"
-                BackgroundColor="#8b5cf6"
+                BackgroundColor="OrangeRed"
                 TextColor="White"
                 FontSize="14"
                 FontAttributes="Bold"
@@ -268,6 +268,151 @@ BackgroundColor="Transparent">
             </Grid>
         </Grid>
 
+        <!-- Add User Form (Overlay) -->
+        <Border
+            Grid.Row="0"
+            Grid.RowSpan="4"
+            BackgroundColor="#00000000"
+            IsVisible="{Binding IsAddUserVisible}"
+            ZIndex="100">
+
+            <Border
+                BackgroundColor="White"
+                StrokeShape="RoundRectangle 20"
+                Stroke="#e5e7eb"
+                StrokeThickness="1"
+                Padding="15"
+                Margin="15"
+                VerticalOptions="Center"
+                HorizontalOptions="Fill">
+
+                <VerticalStackLayout Spacing="15">
+
+                    <!--Form Header-->
+                    <Label
+                        Text="➕ Add New User"
+                        FontSize="24"
+                        FontAttributes="Bold"
+                        TextColor="#1F2937"
+                        HorizontalOptions="Center"
+                        Margin="0,0,0,10">
+                    </Label>
+
+                    <!--Name Input-->
+                    <VerticalStackLayout Spacing="15">
+                        <Label
+                            Text="Full Name"
+                            FontSize="14"
+                            FontAttributes="Bold"
+                            TextColor="#374151">
+                        </Label>
+                        <Border
+                            Stroke="#d1d5db"
+                            StrokeThickness="2"
+                            StrokeShape="RoundRectangle 8"
+                            BackgroundColor="White">
+
+                            <Entry
+                                Text="{Binding NewUserName}"
+                                Placeholder="Enter full name"
+                                FontSize="16"
+                                TextColor="#1f2937"
+                                PlaceholderColor="#9ca3af"
+                                BackgroundColor="Transparent">
+                            </Entry>
+                        </Border>
+                    </VerticalStackLayout>
+
+                    <!--Email Input-->
+                    <VerticalStackLayout Spacing="5">
+                        <Label
+                            Text="Email"
+                            FontSize="14"
+                            FontAttributes="Bold"
+                            TextColor="#374151">
+                        </Label>
+                        <Border
+                            Stroke="#d1d5db"
+                            StrokeThickness="2"
+                            StrokeShape="RoundRectangle 8"
+                            BackgroundColor="White">
+                            <Entry
+                                Text="{Binding NewUserEmail}"
+                                Placeholder="email@company.com"
+                                Keyboard="Email"
+                                FontSize="16"
+                                TextColor="#1f2937"
+                                PlaceholderColor="#9ca3af"
+                                BackgroundColor="Transparent">
+                            </Entry>
+                        </Border>
+                    </VerticalStackLayout>
+
+                    <!--Role Input-->
+                    <VerticalStackLayout Spacing="5">
+                        <Label
+                            Text="Role"
+                            FontSize="14"
+                            FontAttributes="Bold"
+                            TextColor="#374151">
+                        </Label>
+                        <Border
+                            Stroke="#d1d5db"
+                            StrokeThickness="2"
+                            StrokeShape="RoundRectangle 8"
+                            BackgroundColor="White">
+                            <Picker
+                                Title="Select Role"
+                                SelectedItem="{Binding NewUserRole}"
+                                FontSize="16"
+                                TextColor="#1f2937"
+                                BackgroundColor="Transparent">
+                                <Picker.Items>
+                                    <x:String>Administrator</x:String>
+                                    <x:String>Manager</x:String>
+                                    <x:String>Developer</x:String>
+                                    <x:String>Designer</x:String>
+                                    <x:String>HR</x:String>
+                                    <x:String>Security</x:String>
+                                </Picker.Items>
+                            </Picker>
+                        </Border>
+                    </VerticalStackLayout>
+                    
+                    <!--Actions Buttons-->
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="10" Margin="0,10,0,0">
+                        
+                        <!--Save Button-->
+                        <Button
+                            Grid.Column="0"
+                            Text="Add USer"
+                            Command="{Binding AddUserCommand}"
+                            BackgroundColor="Crimson"
+                            TextColor="White"
+                            FontSize="16"
+                            FontAttributes="Bold"
+                            CornerRadius="10"
+                            HeightRequest="50">                            
+                        </Button>
+                        
+                        <!--Calcel Button-->
+                        <Button
+                            Grid.Column="1"
+                            Text="Cancel"
+                            Command="{Binding CancelAddUserCommand}"
+                            BackgroundColor="Black"
+                            TextColor="White"
+                            FontSize="16"
+                            FontAttributes="Bold"
+                            CornerRadius="10"
+                            HeightRequest="50">                            
+                        </Button>
+                    </Grid>
+                    
+                </VerticalStackLayout>
+            </Border>
+        </Border>
+
         <!-- Footer Stats -->
         <Border
             Grid.Row="3"
@@ -296,7 +441,7 @@ BackgroundColor="Transparent">
 
                 <Label
                     Grid.Column="1"
-                    Text="Powered by MVVM"
+                    Text="Powered by MVVM - Emilio Barrera"
                     FontSize="11"
                     TextColor="#9CA3AF"
                     VerticalOptions="Center"

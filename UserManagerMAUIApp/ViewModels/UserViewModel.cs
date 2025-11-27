@@ -128,7 +128,7 @@ namespace UserManagerMAUIApp.ViewModels
                     return;
                 }
 
-                if (!string.IsNullOrWhiteSpace(NewUserRole))
+                if (string.IsNullOrWhiteSpace(NewUserRole))
                 {
                     StatusMessage = "Please enter a role";
                     return;
