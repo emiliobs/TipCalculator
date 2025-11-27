@@ -84,6 +84,92 @@ namespace UserManagerMAUIApp.ViewModels
         }
 
         /// <summary>
+        /// Command to show the add user form
+        /// </summary>
+        [RelayCommand]
+        private void ShowAddUserForm()
+        {
+            IsAddUserVisible = true;
+            NewUserName = string.Empty;
+            NewUserEmail = string.Empty;
+            NewUserRole = string.Empty;
+        }
+
+        /// <summary>
+        /// Command to cancel adding a user
+        /// </summary>
+        [RelayCommand]
+        private void CancelAddUser()
+        {
+            IsAddUserVisible = false;
+            NewUserName = string.Empty;
+            NewUserEmail = string.Empty;
+            NewUserRole = string.Empty;
+        }
+
+        /// <summary>
+        /// Command to add a new user
+        /// </summary>
+        [RelayCommand]
+        private async Task AddUserAsync()
+        {
+            try
+            {
+                // Validation
+                if (string.IsNullOrWhiteSpace(NewUserName))
+                {
+                    StatusMessage = "Please enter a name";
+                    return;
+                }
+
+                if (string.IsNullOrWhiteSpace(NewUserEmail))
+                {
+                    StatusMessage = "Please enter a email.";
+                    return;
+                }
+
+                if (!string.IsNullOrWhiteSpace(NewUserRole))
+                {
+                    StatusMessage = "Please enter a role";
+                    return;
+                }
+
+                IsLoading = true;
+                StatusMessage = $"Adding {NewUserName}.....";
+
+                // Generate new ID
+                int newId = Users.Count > 0 ? Users.Max(u => u.id) + 1 : 1;
+
+                // Create new user
+                var newUser = new User(newId, NewUserName, NewUserEmail, NewUserRole, true);
+
+                // Add to service
+                await _userService.AddUserAsync(newUser);
+
+                // Add to collection
+                Users.Add(newUser);
+
+                TotalUsers = Users.Count;
+                HasUsers = Users.Count > 0;
+                StatusMessage = $"Succesfully added {newUserName}";
+
+                // Close form and clear input
+                IsAddUserVisible = false;
+                NewUserEmail = string.Empty;
+                NewUserRole = string.Empty;
+                NewUserRole = string.Empty;
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = $"Error: {ex.Message}";
+            }
+            finally
+            {
+                IsLoading = false;
+            }
+        }
+
+        /// <summary>
         /// Command to load users from the service
         /// </summary>
         [RelayCommand]
