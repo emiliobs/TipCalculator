@@ -35,7 +35,7 @@
         <!-- Action Buttons Section -->
         <Grid
             Grid.Row="1"
-            ColumnDefinitions="*,*"
+            ColumnDefinitions="*,*,*"
             ColumnSpacing="12"
             Padding="15,15,15,10"
             BackgroundColor="White">
@@ -56,6 +56,19 @@
             <!-- Refresh Button -->
             <Button
                 Grid.Column="1"
+                Text="➕ Add"
+                Command="{Binding ShowAddUserFormCommand}"
+                IsEnabled="{Binding IsLoading, Converter={StaticResource InvertedBoolConverter}}"
+                BackgroundColor="#8b5cf6"
+                TextColor="White"
+                FontSize="14"
+                FontAttributes="Bold"
+                CornerRadius="10"
+                HeightRequest="50">
+            </Button>
+
+            <Button
+                Grid.Column="2"
                 Text="🔄 Refresh"
                 Command="{Binding RefreshUsersCommand}"
                 IsEnabled="{Binding IsLoading, Converter={StaticResource InvertedBoolConverter}}"
@@ -66,7 +79,7 @@
                 CornerRadius="10"
                 HeightRequest="50" />
         </Grid>
-        
+
         <!--Zona Contenido (row 2)-->
         <Grid Grid.Row="2" RowDefinitions="Auto, *">
             <!-- Status Bar -->
@@ -80,11 +93,11 @@
                 IsVisible="{Binding IsLoading, Converter={StaticResource InvertedBoolConverter}}">
 
                 <HorizontalStackLayout Spacing="12">
-                  <Label
+                    <Label
                     Text="📊"
                     FontSize="18"
-                    VerticalOptions="Center"/>
-                  <Label
+                    VerticalOptions="Center" />
+                    <Label
                     Text="{Binding StatusMessage}"
                     FontSize="14"
                     TextColor="#3B82F6"
@@ -254,7 +267,7 @@ BackgroundColor="Transparent">
                 </CollectionView>
             </Grid>
         </Grid>
-        
+
         <!-- Footer Stats -->
         <Border
             Grid.Row="3"
